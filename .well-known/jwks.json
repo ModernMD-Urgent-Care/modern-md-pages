@@ -1,0 +1,12 @@
+{
+  "keys": [
+    {
+      "kty": "RSA",
+      "kid": "modernmd-sandbox-2026-10",
+      "use": "sig",
+      "alg": "RS384",
+      "n": "xHL4qZYnrO182GSoxiVJPlg42tdCAmwhttN_YsWkPlCNNM2R892qR1l4cCDgwRSpzMQ2QBB0_PO64aSI8qFLyiUm3DUA2_jpdW17poD4lfQDxangzi71-rOVdr3PaAfIb8CvbcgHdARjXmuDSbSikZjev5jVjC5riL5f1I4En25nbmqO5MwmAM0ym97v5MR9yQuZ9a_n4cv-37cc98nCq5oVZyncRCrBSHlFjg5EbM6rux-QrrHh_GOoYLFuevEUEjMipyUVEMgx9ja35Wdpb9Bom4u7FCvvcxJZH4gMDFhL1wwa_OIgU9ZD_W5q5Q93EKOAA62l6vag0dh28YIlsw",
+      "e": "AQAB"
+    }
+  ]
+}
