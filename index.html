@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Text Message Sign-Up | ModernMD Urgent Care</title>
+<meta name="description" content="Sign up to receive text messages from ModernMD Urgent Care about your visits." />
+<meta name="referrer" content="no-referrer" />
+<meta name="theme-color" content="#DC3027" />
+<!-- Fallback CSP for hosts that can't set headers; prefer the same rules as a real header (see DEPLOY.md).
+     connect-src 'self' = the consent endpoint must be on the same site, e.g. /api/sms-consent. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; connect-src 'self'; form-action 'none'; base-uri 'none'" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23DC3027'/%3E%3Cpath d='M13 6h6v7h7v6h-7v7h-6v-7H6v-6h7z' fill='%23fff'/%3E%3C/svg%3E" />
+<style>
+  :root{--ink:#3A3A3C;--red:#DC3027;--grey:#5F6161;--page:#F4F3F2;--surface:#FFFFFF;--border:#CFCAC6;--radius:14px;--shadow:0 1px 2px rgba(58,58,60,.06),0 8px 24px rgba(58,58,60,.07);--tint:#FBEEED;--ok:#1E6B3A}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--page);line-height:1.5;overflow-x:hidden}
+  .wrap{max-width:720px;margin:0 auto;padding:0 16px}
+  :focus-visible{outline:3px solid #1F5FBF;outline-offset:2px}
+  button,input,a{font:inherit;color:inherit}
+  a{color:#1F5FBF}
+  .topbar{background:#fff;color:var(--ink);padding:10px 0;border-bottom:3px solid var(--red)}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:1.1rem}
+  .logo{display:block;height:40px;width:auto;max-width:100%}
+  .lang{display:flex;gap:4px}
+  .lang button{min-height:44px;min-width:44px;padding:0 12px;border-radius:10px;border:1px solid #8A8583;background:transparent;color:var(--ink);font-weight:600;cursor:pointer}
+  .lang button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+  header.hero{padding:28px 0 8px}
+  h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.6rem,5vw,2.2rem);line-height:1.15;margin-bottom:8px}
+  .intro{color:var(--grey);font-size:1.02rem}
+  h2{font-family:Georgia,"Times New Roman",serif;font-size:1.2rem;margin-bottom:8px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin:16px 0}
+  label.field{display:block;font-weight:600;margin-bottom:4px}
+  input[type=text],input[type=tel]{width:100%;min-height:48px;border:1px solid #8A8583;border-radius:10px;padding:0 12px;font-size:1rem;background:#fff}
+  .row{margin-bottom:16px}
+  .hint{font-size:.85rem;color:var(--grey);margin-top:2px}
+  .err{color:#A3120B;font-size:.9rem;font-weight:600;margin-top:4px;display:none}
+  .err.on{display:block}
+  .check{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:14px;background:#FBFAF9}
+  .check input{flex:0 0 24px;width:24px;height:24px;margin-top:2px;accent-color:var(--red)}
+  .check .txt{font-size:.92rem}
+  .check .txt p+p{margin-top:8px}
+  .check.bad{border-color:#A3120B;background:#FDF1F0}
+  button.submit{width:100%;min-height:52px;border:none;border-radius:12px;background:var(--red);color:#fff;font-weight:700;font-size:1.05rem;cursor:pointer}
+  button.submit:hover{background:#B9261F}
+  .confirm{background:#FFF1A8;color:#4A3C00;border:1px dashed #A68A00;border-radius:6px;padding:0 4px;font-weight:700;font-size:.92em}
+  .done{display:none;background:#EAF5EE;border:1px solid #9BCBAC;border-left:5px solid var(--ok);border-radius:var(--radius);padding:16px;margin-top:16px}
+  .done.on{display:block}
+  .sample{background:#F0EEEC;border-radius:16px 16px 16px 4px;padding:10px 14px;margin:8px 0;max-width:34em;font-size:.95rem}
+  .sample.reply{background:#E3EEFB;border-radius:16px 16px 4px 16px;margin-left:auto}
+  .sample small{display:block;color:var(--grey);font-size:.75rem}
+  footer{padding:8px 0 40px;font-size:.88rem;color:var(--grey)}
+  footer p{margin-bottom:6px}
+  .draft{background:#FFF4C2;color:#5A4A00;font-size:.85rem;text-align:center;padding:6px 12px;border-bottom:1px solid #E8D98A}
+</style>
+</head>
+<body>
+<div class="draft" data-i18n="draft"><b>DRAFT.</b> Yellow <span class="confirm">[CONFIRM: …]</span> items must be filled in by ModernMD before this page goes live. Nothing on this page is sent anywhere yet.</div>
+<div class="topbar"><div class="wrap">
+  <div class="brand"><svg class="logo" role="img" aria-label="ModernMD Urgent Care" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 425 98" fill="none"><g clip-path="url(#clip0_1_261)"><path d="M56.26 0H37.23L0 37.21V56.22L37.23 93.33H56.26L93.48 56.21V37.2L56.26 0ZM77.26 56.22H56.26V77.05H37.25V56.22H16.58V37.21H37.25V16.38H56.26V37.21H77.26V56.22Z" fill="#AD2119"></path><path d="M0.0200043 37.2H37.24V0" fill="#DE2E26"></path><path d="M56.26 0V37.2H93.48" fill="#DE2E26"></path><path d="M37.23 93.34L37.22 56.21H0" fill="#DE2E26"></path><path d="M93.48 56.21H56.26V93.34" fill="#DE2E26"></path><path d="M110.49 24.35H118.55L132.72 61.93L146.89 24.35H154.95V70.64H148.84V33.38H148.71L135.19 70.64H130.25L116.73 33.38H116.6V70.64H110.49V24.35Z" fill="#3A3A3C"></path><path d="M177.2 38.79C186.69 38.79 192.41 45.68 192.41 55.11C192.41 64.54 186.69 71.43 177.2 71.43C167.71 71.43 161.99 64.54 161.99 55.11C161.99 45.68 167.71 38.79 177.2 38.79ZM177.2 67.27C184.87 67.27 186.69 60.25 186.69 55.11C186.69 49.97 184.87 42.95 177.2 42.95C169.53 42.95 167.71 49.97 167.71 55.11C167.71 60.25 169.53 67.27 177.2 67.27Z" fill="#3A3A3C"></path><path d="M227.07 70.65H221.74V66.94H221.61H221.67C219.52 69.87 215.88 71.43 212.11 71.43C200.6 71.43 196.83 63.43 196.83 55.11C196.83 46.79 200.99 38.79 211.65 38.79C215.81 38.79 219.32 40.35 221.6 43.47H221.73V24.35H227.06V70.64L227.07 70.65ZM212.25 66.88C219.14 66.88 221.94 61.29 221.94 55.11C221.94 48.93 218.43 43.34 212.25 43.34C205.36 43.34 202.56 48.93 202.56 55.11C202.56 61.29 205.36 66.88 212.25 66.88Z" fill="#3A3A3C"></path><path d="M238.71 56.28C238.71 62.46 241.96 67.27 248.07 67.27C252.75 67.27 255.61 64.93 256.78 60.31L262.05 60.96C260.03 67.92 254.77 71.43 247.88 71.43C238.39 71.63 232.99 64.21 232.99 55.37C232.99 45.29 237.74 38.79 247.81 38.79C257.88 38.79 262.31 45.88 262.31 55.04V56.28H238.71ZM256.59 52.12C255.94 47.05 253.08 42.95 247.23 42.95C242.03 42.95 239.04 47.37 238.71 52.12H256.59Z" fill="#3A3A3C"></path><path d="M268.62 39.57H273.95V44.9H274.08C276.62 40.67 279.67 39.18 285.07 39.18V45.03C284.03 44.97 282.4 44.9 281.49 44.9C276.35 44.9 273.95 49.65 273.95 53.22V70.64H268.62V39.56V39.57Z" fill="#3A3A3C"></path><path d="M290.27 39.57H295.6V43.73H295.73C297.75 40.61 300.8 38.79 304.83 38.79C311.07 38.79 315.82 41.52 315.82 50.17V70.65H310.49V50.69C310.49 45.36 307.69 43.73 303.92 43.73C298.98 43.73 295.6 46.92 295.6 51.92V70.65H290.27V39.57Z" fill="#3A3A3C"></path><path d="M324.15 24.35H341.12L349.31 58.74H349.44L357.89 24.35H374.66V70.64H363.74V34.69H363.61L354.44 70.64H344.23L334.8 34.69H334.67V70.64H324.14V24.35H324.15Z" fill="#3A3A3C"></path><path d="M383.06 24.35H401.01C415.12 24.35 424.61 31.05 424.61 47.5C424.61 63.95 415.12 70.65 401.01 70.65H383.06V24.35ZM394.63 60.89H401.26C409.91 60.89 413.03 54.97 413.03 47.5C413.03 40.03 409.91 34.11 401.2 34.11H394.63V60.9V60.89Z" fill="#3A3A3C"></path><path d="M246.32 84.81H247.96V92.37C247.96 95.46 249.27 96.44 250.93 96.44C252.59 96.44 253.98 95.46 253.98 92.37V84.81H255.54V92.34C255.54 96.46 253.55 97.87 250.93 97.87C248.31 97.87 246.32 96.46 246.32 92.34V84.81Z" fill="#7D8080"></path><path d="M271.79 97.63L268.7 92.22H266.39V97.63H264.75V84.81H268.78C271.38 84.81 273.26 85.75 273.26 88.41C273.26 90.4 272.13 91.6 270.39 92.05L273.65 97.64H271.79V97.63ZM266.4 90.89H268.55C270.54 90.89 271.64 90.07 271.64 88.41C271.64 86.75 270.55 86.12 268.55 86.12H266.4V90.89Z" fill="#7D8080"></path><path d="M287.06 84.58C288.8 84.58 289.97 85.38 290.73 86.16L289.79 87.2C289.14 86.52 288.34 86.01 287.07 86.01C284.47 86.01 282.81 88 282.81 91.19C282.81 94.38 284.33 96.45 287.07 96.45C287.99 96.45 288.89 96.16 289.4 95.69V92.35H286.68V91H290.88V96.39C290.04 97.21 288.61 97.88 286.89 97.88C283.53 97.88 281.12 95.42 281.12 91.23C281.12 87.04 283.6 84.58 287.04 84.58H287.06Z" fill="#7D8080"></path><path d="M299.71 84.81H307.1V86.18H301.35V90.21H306.2V91.6H301.35V96.25H307.29V97.64H299.71V84.82V84.81Z" fill="#7D8080"></path><path d="M316.76 84.81H318.44L323.09 92.86L324.48 95.52H324.56C324.48 94.23 324.34 92.78 324.34 91.43V84.8H325.88V97.62H324.2L319.57 89.55L318.18 86.91H318.1C318.18 88.2 318.3 89.57 318.3 90.92V97.62H316.75V84.8L316.76 84.81Z" fill="#7D8080"></path><path d="M337.85 86.18H333.96V84.81H343.36V86.18H339.47V97.63H337.85V86.18Z" fill="#7D8080"></path><path d="M364.46 84.58C365.99 84.58 367.2 85.32 367.96 86.16L367.04 87.2C366.36 86.48 365.54 86.01 364.48 86.01C362.04 86.01 360.41 88 360.41 91.19C360.41 94.38 361.95 96.45 364.4 96.45C365.61 96.45 366.51 95.94 367.33 95.02L368.25 96.02C367.25 97.19 365.98 97.88 364.36 97.88C361.14 97.88 358.73 95.42 358.73 91.23C358.73 87.04 361.17 84.58 364.46 84.58Z" fill="#7D8080"></path><path d="M382.27 93.73H377.6L376.37 97.64H374.71L379.05 84.82H380.89L385.23 97.64H383.51L382.28 93.73H382.27ZM381.86 92.42L381.25 90.46C380.8 89.03 380.39 87.63 379.98 86.14H379.9C379.49 87.63 379.08 89.03 378.63 90.46L378.01 92.42H381.86Z" fill="#7D8080"></path><path d="M399.83 97.63L396.74 92.22H394.43V97.63H392.79V84.81H396.82C399.42 84.81 401.3 85.75 401.3 88.41C401.3 90.4 400.17 91.6 398.43 92.05L401.69 97.64H399.83V97.63ZM394.43 90.89H396.58C398.57 90.89 399.67 90.07 399.67 88.41C399.67 86.75 398.58 86.12 396.58 86.12H394.43V90.89Z" fill="#7D8080"></path><path d="M409.92 84.81H417.31V86.18H411.56V90.21H416.41V91.6H411.56V96.25H417.5V97.64H409.92V84.82V84.81Z" fill="#7D8080"></path></g><defs><clipPath id="clip0_1_261"><rect width="424.6" height="97.87" fill="white"></rect></clipPath></defs></svg></div>
+  <div class="lang" role="group" aria-label="Language / Idioma">
+    <button type="button" id="l-en" lang="en" aria-pressed="true">English</button>
+    <button type="button" id="l-es" lang="es" aria-pressed="false">Español</button>
+  </div>
+</div></div>
+
+<main class="wrap">
+  <header class="hero">
+    <h1 data-i18n="h1">Get text updates about your visit</h1>
+    <p class="intro" data-i18n="intro">Sign up to receive text messages from ModernMD Urgent Care: appointment confirmations and reminders, check-in and video visit links, and visit status updates.</p>
+  </header>
+
+  <form class="card" id="f" novalidate aria-labelledby="formtitle">
+    <h2 id="formtitle" data-i18n="formtitle">Sign up for texts</h2>
+
+    <div class="row">
+      <label class="field" for="name" data-i18n="l-name">Full name</label>
+      <input type="text" id="name" name="name" autocomplete="name" required aria-describedby="e-name" />
+      <p class="err" id="e-name" role="alert" data-i18n="e-name">Please enter your name.</p>
+    </div>
+
+    <div class="row">
+      <label class="field" for="phone" data-i18n="l-phone">Mobile phone number</label>
+      <input type="tel" id="phone" name="phone" autocomplete="tel-national" inputmode="tel" placeholder="(555) 555-0100" required aria-describedby="h-phone e-phone" />
+      <p class="hint" id="h-phone" data-i18n="h-phone">US mobile number that can receive text messages.</p>
+      <p class="err" id="e-phone" role="alert" data-i18n="e-phone">Please enter a valid 10-digit US mobile number.</p>
+    </div>
+
+    <div class="check" id="c-consent">
+      <input type="checkbox" id="consent" name="sms_consent" aria-describedby="e-consent" />
+      <label for="consent" class="txt">
+        <p data-i18n="consent1">I agree to receive text messages from ModernMD Urgent Care about my visits: appointment confirmations and reminders, check-in and video visit links, and visit status updates. Up to 5 text messages per month. Msg &amp; data rates may apply. Reply <b>HELP</b> for help or <b>STOP</b> to opt out at any time. Consent is not a condition of receiving care.</p>
+        <p data-i18n="consent2">Texts are not encrypted. We never include test results, diagnoses or medication names in a text; we send a secure link instead.</p>
+        <p data-i18n="consent3">We do not sell or share your mobile number or opt-in consent with third parties or affiliates for marketing.</p>
+      </label>
+    </div>
+    <p class="err" id="e-consent" role="alert" style="margin:-8px 0 14px" data-i18n="e-consent">Please tick the box to agree to receive text messages.</p>
+
+    <div class="check" id="c-terms">
+      <input type="checkbox" id="terms" name="terms" aria-describedby="e-terms" />
+      <label for="terms" class="txt" data-i18n="l-terms">I have read and agree to the <a href="https://modernmduc.com/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>.</label>
+    </div>
+    <p class="err" id="e-terms" role="alert" style="margin:-8px 0 14px" data-i18n="e-terms">Please tick the box to agree to the Privacy Policy.</p>
+
+    <button type="submit" class="submit" data-i18n="submit">Sign me up</button>
+    <p class="err" id="e-send" role="alert" style="margin:10px 0 0" data-i18n="e-send">Sorry, something went wrong and we could not sign you up. Please try again, or call 646-604-8119.</p>
+    <div class="done" id="done" role="status" tabindex="-1"></div>
+  </form>
+
+  <section class="card" aria-labelledby="inapp">
+    <h2 id="inapp" data-i18n="inapp-h">Or sign up when you check in online</h2>
+    <p data-i18n="inapp-p">When you book a visit through ModernMD's online check-in, you can tick this box (it starts unticked):</p>
+    <p class="sample">I agree to receive up to 5 text messages per month from ModernMD with a secure link to confirm my details and check in before my visits at ModernMD Urgent Care. Msg &amp; data rates may apply. Reply STOP to opt out at any time. Consent is not a condition of receiving care.</p>
+  </section>
+  <section class="card" aria-labelledby="samples">
+    <h2 id="samples" data-i18n="samples">What our texts look like</h2>
+    <p class="hint" data-i18n="samples-hint">Examples only. Names are made up. Our texts give status only, never test results, diagnoses or medication names.</p>
+    <div class="sample" data-i18n="s1">ModernMD: your telemedicine visit is confirmed for [day], [date] at [time] ET. We'll send your link to join about [N] minutes before. Msg&amp;data rates may apply. Reply STOP to opt out.</div>
+    <div class="sample" data-i18n="s2">ModernMD: your visit starts soon ([day], [date] at [time] ET). Join here: [link] Reply STOP to opt out.</div>
+    <div class="sample" data-i18n="s3">ModernMD: your visit starts in about [N] minutes. Join here: [link] Reply STOP to opt out.</div>
+    <div class="sample reply"><small data-i18n="you">You send</small>HELP</div>
+    <div class="sample" data-i18n="s4">ModernMD Urgent Care: For help call 646-604-8119 or email <a href="mailto:info@modernmduc.com">info@modernmduc.com</a>. Reply STOP to opt out. Msg&amp;data rates may apply.</div>
+    <div class="sample reply"><small data-i18n="you2">You send</small>STOP</div>
+    <div class="sample" data-i18n="s5">ModernMD Urgent Care: You are unsubscribed and will receive no more texts. Reply START to re-subscribe.</div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p>Modern MD Management Services LLC · 3256 Steinway St, 2nd FL, Astoria, NY 11103 · <a href="tel:+16466048119">646-604-8119</a> · <a href="mailto:info@modernmduc.com">info@modernmduc.com</a></p>
+  <p data-i18n="foot-links"><a href="https://modernmduc.com/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a></p>
+</footer>
+
+<script>
+(function(){
+  function $(i){return document.getElementById(i);}
+  function show(id,on){$(id).classList.toggle('on',on);}
+
+  /* ---- Languages. English is read from the page itself; Spanish is below.
+     Spanish is a DRAFT translation: have a native speaker / ModernMD's counsel review it.
+     HELP, STOP and START stay in English because carriers match those keywords. ---- */
+  var ES={
+    'draft':'<b>BORRADOR.</b> ModernMD debe completar los elementos amarillos <span class="confirm">[CONFIRM: …]</span> antes de publicar esta página. Por ahora, nada de esta página se envía a ningún lado.',
+    'h1':'Reciba mensajes de texto sobre su visita',
+    'intro':'Regístrese para recibir mensajes de texto de ModernMD Urgent Care: confirmaciones y recordatorios de citas, enlaces de registro y de visitas por video, y actualizaciones sobre el estado de su visita.',
+    'formtitle':'Regístrese para recibir mensajes',
+    'l-name':'Nombre completo',
+    'e-name':'Ingrese su nombre.',
+    'l-phone':'Número de teléfono móvil',
+    'h-phone':'Número móvil de EE. UU. que pueda recibir mensajes de texto.',
+    'e-phone':'Ingrese un número móvil válido de EE. UU. de 10 dígitos.',
+    'consent1':'Acepto recibir mensajes de texto de ModernMD Urgent Care sobre mis visitas: confirmaciones y recordatorios de citas, enlaces de registro y de visitas por video, y actualizaciones sobre el estado de mi visita. Hasta 5 mensajes de texto por mes. Pueden aplicarse tarifas de mensajes y datos. Responda <b>HELP</b> para obtener ayuda o <b>STOP</b> para cancelar en cualquier momento (escriba la palabra en inglés). El consentimiento no es una condición para recibir atención.',
+    'consent2':'Los mensajes de texto no están cifrados. Nunca incluimos resultados de pruebas, diagnósticos ni nombres de medicamentos en un mensaje; en su lugar, enviamos un enlace seguro.',
+    'consent3':'No vendemos ni compartimos su número de teléfono móvil ni su consentimiento con terceros ni afiliados con fines de marketing.',
+    'e-consent':'Marque la casilla para aceptar recibir mensajes de texto.',
+    'l-terms':'He leído y acepto la <a href="https://modernmduc.com/privacy-policy/" target="_blank" rel="noopener">Política de privacidad</a>.',
+    'e-send':'Lo sentimos, algo salió mal y no pudimos registrarlo. Inténtelo de nuevo o llame al 646-604-8119.',
+    'e-terms':'Marque la casilla para aceptar la Política de privacidad.',
+    'submit':'Registrarme',
+    'samples':'Cómo son nuestros mensajes',
+    'samples-hint':'Solo ejemplos. Los nombres son ficticios. Nuestros mensajes solo informan el estado; nunca incluyen resultados de pruebas, diagnósticos ni nombres de medicamentos.',
+    's1':'ModernMD: su visita de telemedicina está confirmada para el [day], [date] a las [time] (hora del Este). Le enviaremos el enlace para conectarse unos [N] minutos antes. Pueden aplicarse tarifas de mensajes y datos. Responda STOP para cancelar.',
+    's2':'ModernMD: su visita comienza pronto ([day], [date] a las [time] (hora del Este)). Conéctese aquí: [link] Responda STOP para cancelar.',
+    's3':'ModernMD: su visita comienza en unos [N] minutos. Conéctese aquí: [link] Responda STOP para cancelar.',
+    'you':'Usted envía',
+    's4':'ModernMD Urgent Care: Para obtener ayuda, llame al 646-604-8119 o escriba a <a href="mailto:info@modernmduc.com">info@modernmduc.com</a>. Responda STOP para cancelar. Pueden aplicarse tarifas de mensajes y datos.',
+    'you2':'Usted envía',
+    's5':'ModernMD Urgent Care: Se canceló su suscripción y no recibirá más mensajes. Responda START para volver a suscribirse.',
+    'inapp-h':'O regístrese al hacer su registro en línea',
+    'inapp-p':'Cuando reserva una visita con el registro en línea de ModernMD, puede marcar esta casilla (empieza sin marcar; el texto aparece en inglés):',
+    'foot-links':'<a href="https://modernmduc.com/privacy-policy/" target="_blank" rel="noopener">Política de privacidad</a>'
+  };
+  var DONE={
+    en:'<b>Thank you, you\'re signed up.</b> You will get a confirmation text shortly. Reply <b>STOP</b> at any time to opt out.',
+    es:'<b>Gracias, ya está registrado.</b> Recibirá un mensaje de confirmación en breve. Responda <b>STOP</b> en cualquier momento para cancelar.'
+  };
+  var PREVIEW={
+    en:'<b>Online sign-up is not switched on yet</b>, so nothing was sent or saved. You can still agree to texts when you book your visit online.',
+    es:'<b>El registro en línea aún no está activado</b>, por lo que no se envió ni se guardó nada. Puede aceptar los mensajes de texto cuando reserve su visita en línea.'
+  };
+  /* ---- Deploy settings. LIVE mode (real submit) needs BOTH: an endpoint here AND no yellow [CONFIRM] tags left on the page.
+     Otherwise the page stays in PREVIEW mode and sends nothing. See DEPLOY.md. ---- */
+  var CONFIG={
+    endpoint:'',                    // e.g. '/api/sms-consent' (same site; see the CSP above)
+    consentVersion:'2026-11-03-v1' // change whenever any consent wording changes
+  };
+  function unresolved(){
+    return [].filter.call(document.querySelectorAll('.confirm'),function(el){return !el.closest('.draft');}).length;
+  }
+  function isLive(){return !!CONFIG.endpoint && unresolved()===0;}
+  function syncBanner(){document.querySelector('.draft').style.display=unresolved()?'':'none';}
+  var TITLE={en:'Text Message Sign-Up | ModernMD Urgent Care',es:'Registro para mensajes de texto | ModernMD Urgent Care'};
+  var EN={}, lang='en', doneOpen=false, doneLive=false, busy=false;
+  [].forEach.call(document.querySelectorAll('[data-i18n]'),function(el){EN[el.getAttribute('data-i18n')]=el.innerHTML;});
+  function setLang(l){
+    lang=l;
+    document.documentElement.lang=l;
+    document.title=TITLE[l];
+    [].forEach.call(document.querySelectorAll('[data-i18n]'),function(el){
+      var k=el.getAttribute('data-i18n'); el.innerHTML=(l==='es'?ES:EN)[k];
+    });
+    $('l-en').setAttribute('aria-pressed',l==='en'); $('l-es').setAttribute('aria-pressed',l==='es');
+    if(doneOpen) $('done').innerHTML=(doneLive?DONE:PREVIEW)[l];
+    syncBanner();
+  }
+  $('l-en').addEventListener('click',function(){setLang('en');});
+  $('l-es').addEventListener('click',function(){setLang('es');});
+
+  function validPhone(v){
+    var d=v.replace(/[\s().\-]/g,'');
+    if(/^\+?1/.test(d)&&d.replace(/^\+?1/,'').length===10) d=d.replace(/^\+?1/,'');
+    // NANP: area code and exchange start 2-9
+    return /^[2-9]\d{2}[2-9]\d{6}$/.test(d)?d:null;
+  }
+  $('f').addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=$('name').value.trim(), ph=validPhone($('phone').value);
+    var ok=true, first=null;
+    function chk(cond,errId,el,box){
+      show(errId,!cond);
+      if(box) $(box).classList.toggle('bad',!cond);
+      el.setAttribute('aria-invalid',cond?'false':'true');
+      if(!cond){ok=false; if(!first) first=el;}
+    }
+    chk(name.length>0,'e-name',$('name'));
+    chk(!!ph,'e-phone',$('phone'));
+    chk($('consent').checked,'e-consent',$('consent'),'c-consent');
+    chk($('terms').checked,'e-terms',$('terms'),'c-terms');
+    var d=$('done');
+    show('e-send',false);
+    if(!ok){doneOpen=false; d.classList.remove('on'); first.focus(); return;}
+    if(busy) return;
+    function finish(live){doneOpen=true; doneLive=live; d.innerHTML=(live?DONE:PREVIEW)[lang]; d.classList.add('on'); d.focus();}
+    if(!isLive()){finish(false); return;}   // preview mode: no network request, nothing stored
+    /* LIVE: the server stores the consent record (phone, name, the exact wording shown, its version, language) and a
+       server-side timestamp, then sends the confirmation text. It must not log the phone number in plain logs. */
+    var consentText=[].map.call(document.querySelectorAll('#c-consent .txt p, #c-terms .txt'),function(p){return p.textContent.replace(/\s+/g,' ').trim();}).join('\n');
+    var btn=f.querySelector('button.submit'), ctl=new AbortController(), timer=setTimeout(function(){ctl.abort();},10000);
+    busy=true; btn.disabled=true;
+    fetch(CONFIG.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',signal:ctl.signal,
+      body:JSON.stringify({name:name,phone:'+1'+ph,language:lang,consentVersion:CONFIG.consentVersion,consentText:consentText,privacyAccepted:true})})
+    .then(function(r){ if(!r.ok) throw new Error('http '+r.status); finish(true); })
+    .catch(function(){ show('e-send',true); })
+    .then(function(){ clearTimeout(timer); busy=false; btn.disabled=false; });
+  });
+  syncBanner();
+})();
+</script>
+</body>
+</html>
