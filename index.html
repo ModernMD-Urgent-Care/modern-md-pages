@@ -90,12 +90,16 @@
   footer p{margin-bottom:6px}
   .draft{background:#FFF4C2;color:#5A4A00;font-size:.85rem;text-align:center;padding:6px 12px;border-bottom:1px solid #E8D98A}
 
-  /* calm motion: cards fade up once on load; the thank-you box eases in. Only when JS runs and motion is allowed. */
+  /* calm motion, CSS only: cards rise a few pixels into place on load and the thank-you box eases up. Nothing is ever
+     hidden (no opacity change), so the consent text stays readable even if a browser pauses the animation. None under
+     reduced motion. */
   @media (prefers-reduced-motion:no-preference){
-    html.js-motion .rv{opacity:0;transform:translate3d(0,14px,0);transition:opacity .55s var(--ease-fade),transform .55s var(--ease-out)}
-    html.js-motion .rv.in{opacity:1;transform:none}
-    .done.on{animation:pop .45s var(--ease-out)}
-    @keyframes pop{from{opacity:0;transform:translate3d(0,8px,0)}to{opacity:1;transform:none}}
+    .rv{animation:rise .6s var(--ease-out) both}
+    .grid .rv:nth-of-type(1){animation-delay:.08s}
+    .side .rv:nth-of-type(1){animation-delay:.16s}
+    .side .rv:nth-of-type(2){animation-delay:.24s}
+    .done.on{animation:rise .45s var(--ease-out)}
+    @keyframes rise{from{transform:translate3d(0,12px,0)}to{transform:none}}
   }
 </style>
 </head>
@@ -184,19 +188,6 @@
   <p data-i18n="foot-links"><a href="https://modernmduc.com/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a></p>
 </footer>
 
-<script>
-/* Calm motion: reveal cards once, staggered. Content is only hidden after this runs, and shows at once
-   under reduced motion or if anything here fails. */
-(function(){
-  try{
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    document.documentElement.classList.add('js-motion');
-    var els=[].slice.call(document.querySelectorAll('.rv'));
-    els.forEach(function(el,i){ setTimeout(function(){ el.classList.add('in'); }, 80+i*90); });
-    setTimeout(function(){ els.forEach(function(el){ el.classList.add('in'); }); }, 2000);
-  }catch(e){ document.documentElement.classList.remove('js-motion'); }
-})();
-</script>
 <script>
 (function(){
   function $(i){return document.getElementById(i);}
