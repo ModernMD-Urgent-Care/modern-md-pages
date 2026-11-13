@@ -51,21 +51,19 @@
   /* layout: form left, the in-app box and text examples right; one column on phones */
   .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,400px);gap:24px;align-items:start;padding-top:28px;padding-bottom:8px}
   @media (max-width:900px){.grid{grid-template-columns:1fr;gap:0}}
-  .side{position:sticky;top:20px}
-  @media (max-width:900px){.side{position:static}}
 
   .card{background:var(--surface);border:var(--hair);border-radius:var(--r-card);padding:24px;margin:0 0 16px}
   @media (max-width:560px){.card{padding:20px}}
   label.field{display:block;font-weight:700;font-size:.95rem;margin-bottom:6px}
   input[type=text],input[type=tel]{width:100%;min-height:50px;border:1px solid var(--field);border-radius:var(--r-input);padding:0 14px;font-size:1rem;background:#fff;transition:border-color .2s var(--ease-std),box-shadow .2s var(--ease-std)}
-  input[type=text]:focus,input[type=tel]:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(220,48,39,.22)}
+  input[type=text]:focus,input[type=tel]:focus{outline:2px solid transparent;outline-offset:2px;border-color:var(--red);box-shadow:0 0 0 3px rgba(220,48,39,.22)}
   input[aria-invalid="true"]{border-color:#A3120B}
   .row{margin-bottom:18px}
   .hint{font-size:.88rem;color:var(--muted);margin-top:4px}
   .err{color:#A3120B;font-size:.9rem;font-weight:600;margin-top:6px;display:none}
   .err.on{display:block}
   .check{display:flex;gap:12px;align-items:flex-start;border:var(--hair);border-radius:var(--r-chip);padding:16px;margin-bottom:14px;background:#fbfaf9;transition:border-color .2s var(--ease-std),background .2s var(--ease-std)}
-  .check:has(input:checked){border-color:var(--red);background:var(--tint)}
+  .check.ticked,.check:has(input:checked){border-color:var(--red);background:var(--tint)}
   .check input{flex:0 0 24px;width:24px;height:24px;margin-top:2px;accent-color:var(--red)}
   .check .txt{font-size:.94rem}
   .check .txt p+p{margin-top:8px}
@@ -113,6 +111,7 @@
   </div>
 </div></div>
 
+<main>
 <div class="heroband">
   <svg class="mark" aria-hidden="true" focusable="false" viewBox="0 0 94 94" xmlns="http://www.w3.org/2000/svg"><path d="M56.26 0H37.23L0 37.21V56.22L37.23 93.33H56.26L93.48 56.21V37.2L56.26 0ZM77.26 56.22H56.26V77.05H37.25V56.22H16.58V37.21H37.25V16.38H56.26V37.21H77.26V56.22Z" fill="#DC3027"/></svg>
   <div class="wrap">
@@ -123,7 +122,7 @@
   </div>
 </div>
 
-<main class="wrap grid">
+<div class="wrap grid">
   <div>
   <form class="card rv" id="f" novalidate aria-labelledby="formtitle">
     <h2 id="formtitle" data-i18n="formtitle">Sign up for texts</h2>
@@ -181,6 +180,7 @@
     <div class="sample" data-i18n="s5">ModernMD Urgent Care: You are unsubscribed and will receive no more texts. Reply START to re-subscribe.</div>
   </section>
   </div>
+</div>
 </main>
 
 <footer class="wrap">
@@ -188,6 +188,15 @@
   <p data-i18n="foot-links"><a href="https://modernmduc.com/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a></p>
 </footer>
 
+<script>
+/* Ticked-box tint for browsers without :has(); visual only, the form script below is unchanged. */
+(function(){
+  [].forEach.call(document.querySelectorAll('.check input[type=checkbox]'),function(box){
+    function sync(){ box.closest('.check').classList.toggle('ticked', box.checked); }
+    box.addEventListener('change', sync); sync();
+  });
+})();
+</script>
 <script>
 (function(){
   function $(i){return document.getElementById(i);}
