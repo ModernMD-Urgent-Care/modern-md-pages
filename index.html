@@ -12,48 +12,93 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; connect-src 'self'; form-action 'none'; base-uri 'none'" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23DC3027'/%3E%3Cpath d='M13 6h6v7h7v6h-7v7h-6v-7H6v-6h7z' fill='%23fff'/%3E%3C/svg%3E" />
 <style>
-  :root{--ink:#3A3A3C;--red:#DC3027;--grey:#5F6161;--page:#F4F3F2;--surface:#FFFFFF;--border:#CFCAC6;--radius:14px;--shadow:0 1px 2px rgba(58,58,60,.06),0 8px 24px rgba(58,58,60,.07);--tint:#FBEEED;--ok:#1E6B3A}
+  /* Warm card design (web-design skill, health preset with ModernMD's brand values from Camila, 11/12:
+     #DC3027 / #F15A24). System fonts only: the CSP allows no outside requests. Calm motion, none under reduced
+     motion. Every word on the page is unchanged. */
+  :root{--ink:#1c1917;--muted:#58534f;--red:#DC3027;--red-hover:#b3261e;--grad:linear-gradient(135deg,#DC3027 0%,#F15A24 100%);
+    --page:#f4f2ef;--surface:#fff;--sunken:#ece8e4;--line:#e4e0dc;--field:#8A8583;--tint:#fdecea;--ok:#1E6B3A;--ok-soft:#eaf5ee;
+    --r-input:12px;--r-chip:14px;--r-card:16px;--r-pill:999px;--hair:1px solid var(--line);
+    --ease-std:cubic-bezier(.4,0,.2,1);--ease-out:cubic-bezier(.76,0,.24,1);--ease-fade:cubic-bezier(.6,.01,.05,.95)}
   *{box-sizing:border-box;margin:0;padding:0}
   html{-webkit-text-size-adjust:100%}
-  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--page);line-height:1.5;overflow-x:hidden}
-  .wrap{max-width:720px;margin:0 auto;padding:0 16px}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--page);line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  @media (max-width:560px){.wrap{padding:0 16px}}
   :focus-visible{outline:3px solid #1F5FBF;outline-offset:2px}
   button,input,a{font:inherit;color:inherit}
   a{color:#1F5FBF}
-  .topbar{background:#fff;color:var(--ink);padding:10px 0;border-bottom:3px solid var(--red)}
-  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .brand{display:flex;align-items:center;gap:10px;font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:1.1rem}
+
+  /* header: white bar, thin brand gradient line, language as a segmented switch */
+  .topbar{background:#fff;color:var(--ink);padding:12px 0;position:relative}
+  .topbar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--grad)}
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:10px}
   .logo{display:block;height:40px;width:auto;max-width:100%}
-  .lang{display:flex;gap:4px}
-  .lang button{min-height:44px;min-width:44px;padding:0 12px;border-radius:10px;border:1px solid #8A8583;background:transparent;color:var(--ink);font-weight:600;cursor:pointer}
-  .lang button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
-  header.hero{padding:28px 0 8px}
-  h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.6rem,5vw,2.2rem);line-height:1.15;margin-bottom:8px}
-  .intro{color:var(--grey);font-size:1.02rem}
-  h2{font-family:Georgia,"Times New Roman",serif;font-size:1.2rem;margin-bottom:8px}
-  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin:16px 0}
-  label.field{display:block;font-weight:600;margin-bottom:4px}
-  input[type=text],input[type=tel]{width:100%;min-height:48px;border:1px solid #8A8583;border-radius:10px;padding:0 12px;font-size:1rem;background:#fff}
-  .row{margin-bottom:16px}
-  .hint{font-size:.85rem;color:var(--grey);margin-top:2px}
-  .err{color:#A3120B;font-size:.9rem;font-weight:600;margin-top:4px;display:none}
+  @media (max-width:420px){.logo{height:32px}}
+  .lang{display:inline-flex;gap:2px;background:var(--sunken);border-radius:var(--r-pill);padding:3px}
+  .lang button{min-height:44px;min-width:44px;padding:0 16px;border-radius:var(--r-pill);border:0;background:transparent;color:var(--ink);font-weight:700;cursor:pointer;transition:background .2s var(--ease-std),color .2s var(--ease-std)}
+  .lang button[aria-pressed="true"]{background:var(--ink);color:#fff}
+
+  /* hero: white band, big sans headline, a large cropped cross mark (decoration only) */
+  .heroband{background:#fff;border-bottom:var(--hair);position:relative;overflow:hidden}
+  .heroband .mark{position:absolute;right:-70px;top:-50px;width:340px;height:340px;opacity:.07;pointer-events:none}
+  @media (max-width:700px){.heroband .mark{width:220px;height:220px;right:-90px;top:-40px}}
+  header.hero{padding:44px 0 36px;position:relative;z-index:1}
+  h1{font-size:clamp(2rem,5.6vw,3.4rem);line-height:1.05;font-weight:800;letter-spacing:-.02em;margin-bottom:14px;max-width:640px}
+  .intro{color:var(--muted);font-size:1.12rem;max-width:620px}
+  h2{font-size:1.3rem;font-weight:800;letter-spacing:-.01em;margin-bottom:12px}
+
+  /* layout: form left, the in-app box and text examples right; one column on phones */
+  .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,400px);gap:24px;align-items:start;padding-top:28px;padding-bottom:8px}
+  @media (max-width:900px){.grid{grid-template-columns:1fr;gap:0}}
+
+  .card{background:var(--surface);border:var(--hair);border-radius:var(--r-card);padding:24px;margin:0 0 16px}
+  @media (max-width:560px){.card{padding:20px}}
+  label.field{display:block;font-weight:700;font-size:.95rem;margin-bottom:6px}
+  input[type=text],input[type=tel]{width:100%;min-height:50px;border:1px solid var(--field);border-radius:var(--r-input);padding:0 14px;font-size:1rem;background:#fff;transition:border-color .2s var(--ease-std),box-shadow .2s var(--ease-std)}
+  input[type=text]:focus,input[type=tel]:focus{outline:2px solid transparent;outline-offset:2px;border-color:var(--red);box-shadow:0 0 0 3px rgba(220,48,39,.22)}
+  input[aria-invalid="true"]{border-color:#A3120B}
+  .row{margin-bottom:18px}
+  .hint{font-size:.88rem;color:var(--muted);margin-top:4px}
+  .err{color:#A3120B;font-size:.9rem;font-weight:600;margin-top:6px;display:none}
   .err.on{display:block}
-  .check{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:14px;background:#FBFAF9}
+  .check{display:flex;gap:12px;align-items:flex-start;border:var(--hair);border-radius:var(--r-chip);padding:16px;margin-bottom:14px;background:#fbfaf9;transition:border-color .2s var(--ease-std),background .2s var(--ease-std)}
+  .check.ticked,.check:has(input:checked){border-color:var(--red);background:var(--tint)}
   .check input{flex:0 0 24px;width:24px;height:24px;margin-top:2px;accent-color:var(--red)}
-  .check .txt{font-size:.92rem}
+  .check .txt{font-size:.94rem}
   .check .txt p+p{margin-top:8px}
   .check.bad{border-color:#A3120B;background:#FDF1F0}
-  button.submit{width:100%;min-height:52px;border:none;border-radius:12px;background:var(--red);color:#fff;font-weight:700;font-size:1.05rem;cursor:pointer}
-  button.submit:hover{background:#B9261F}
+  button.submit{width:100%;min-height:54px;border:none;border-radius:var(--r-input);background:var(--red);color:#fff;font-weight:800;font-size:1.08rem;cursor:pointer;transition:background .2s var(--ease-std),transform .15s var(--ease-std)}
+  button.submit:hover{background:var(--red-hover)}
+  button.submit:active{transform:scale(.985)}
+  button.submit:disabled{opacity:.6;cursor:wait}
   .confirm{background:#FFF1A8;color:#4A3C00;border:1px dashed #A68A00;border-radius:6px;padding:0 4px;font-weight:700;font-size:.92em}
-  .done{display:none;background:#EAF5EE;border:1px solid #9BCBAC;border-left:5px solid var(--ok);border-radius:var(--radius);padding:16px;margin-top:16px}
+  .done{display:none;background:var(--ok-soft);border:1px solid #9BCBAC;border-left:5px solid var(--ok);border-radius:var(--r-card);padding:16px;margin-top:16px}
   .done.on{display:block}
-  .sample{background:#F0EEEC;border-radius:16px 16px 16px 4px;padding:10px 14px;margin:8px 0;max-width:34em;font-size:.95rem}
-  .sample.reply{background:#E3EEFB;border-radius:16px 16px 4px 16px;margin-left:auto}
-  .sample small{display:block;color:var(--grey);font-size:.75rem}
-  footer{padding:8px 0 40px;font-size:.88rem;color:var(--grey)}
+
+  /* text examples as a phone-style thread */
+  .sample{background:var(--sunken);border-radius:18px 18px 18px 6px;padding:10px 14px;margin:8px 0;max-width:34em;font-size:.95rem}
+  .sample.reply{background:var(--ink);color:#fff;border-radius:18px 18px 6px 18px;margin-left:auto;width:fit-content}
+  .sample.reply small{color:#d6d1cc}
+  .sample small{display:block;color:var(--muted);font-size:.75rem}
+  .thread .sample:not(.reply){margin-right:28px}
+  .inapp .sample{border-radius:var(--r-chip);background:#fbfaf9;border:var(--hair);max-width:none}
+
+  footer{padding:16px 0 44px;font-size:.88rem;color:var(--muted);border-top:var(--hair);margin-top:16px}
   footer p{margin-bottom:6px}
   .draft{background:#FFF4C2;color:#5A4A00;font-size:.85rem;text-align:center;padding:6px 12px;border-bottom:1px solid #E8D98A}
+
+  /* calm motion, CSS only: cards rise a few pixels into place on load and the thank-you box eases up. Nothing is ever
+     hidden (no opacity change), so the consent text stays readable even if a browser pauses the animation. None under
+     reduced motion. */
+  @media (prefers-reduced-motion:no-preference){
+    .rv{animation:rise .6s var(--ease-out) both}
+    .grid .rv:nth-of-type(1){animation-delay:.08s}
+    .side .rv:nth-of-type(1){animation-delay:.16s}
+    .side .rv:nth-of-type(2){animation-delay:.24s}
+    .done.on{animation:rise .45s var(--ease-out)}
+    @keyframes rise{from{transform:translate3d(0,12px,0)}to{transform:none}}
+  }
 </style>
 </head>
 <body>
@@ -66,13 +111,20 @@
   </div>
 </div></div>
 
-<main class="wrap">
-  <header class="hero">
+<main>
+<div class="heroband">
+  <svg class="mark" aria-hidden="true" focusable="false" viewBox="0 0 94 94" xmlns="http://www.w3.org/2000/svg"><path d="M56.26 0H37.23L0 37.21V56.22L37.23 93.33H56.26L93.48 56.21V37.2L56.26 0ZM77.26 56.22H56.26V77.05H37.25V56.22H16.58V37.21H37.25V16.38H56.26V37.21H77.26V56.22Z" fill="#DC3027"/></svg>
+  <div class="wrap">
+  <header class="hero rv">
     <h1 data-i18n="h1">Get text updates about your visit</h1>
     <p class="intro" data-i18n="intro">Sign up to receive text messages from ModernMD Urgent Care: appointment confirmations and reminders, check-in and wait-time updates, and visit status updates.</p>
   </header>
+  </div>
+</div>
 
-  <form class="card" id="f" novalidate aria-labelledby="formtitle">
+<div class="wrap grid">
+  <div>
+  <form class="card rv" id="f" novalidate aria-labelledby="formtitle">
     <h2 id="formtitle" data-i18n="formtitle">Sign up for texts</h2>
 
     <div class="row">
@@ -108,13 +160,15 @@
     <p class="err" id="e-send" role="alert" style="margin:10px 0 0" data-i18n="e-send">Sorry, something went wrong and we could not sign you up. Please try again, or call 646-604-8119.</p>
     <div class="done" id="done" role="status" tabindex="-1"></div>
   </form>
+  </div>
 
-  <section class="card" aria-labelledby="inapp">
+  <div class="side">
+  <section class="card rv inapp" aria-labelledby="inapp">
     <h2 id="inapp" data-i18n="inapp-h">Or sign up when you check in online</h2>
     <p data-i18n="inapp-p">When you book a visit through ModernMD's online check-in, you can tick this box (it starts unticked):</p>
     <p class="sample">I agree to receive up to 5 text messages per month from ModernMD with a secure link to confirm my details and check in before my visits at ModernMD Urgent Care. Msg &amp; data rates may apply. Reply STOP to opt out at any time. Consent is not a condition of receiving care.</p>
   </section>
-  <section class="card" aria-labelledby="samples">
+  <section class="card rv thread" aria-labelledby="samples">
     <h2 id="samples" data-i18n="samples">What our texts look like</h2>
     <p class="hint" data-i18n="samples-hint">Examples only. Names are made up. Our texts give status only, never test results, diagnoses or medication names.</p>
     <div class="sample" data-i18n="s1">ModernMD Urgent Care: you're checked in at [clinic]. About [N] people are ahead of you. Msg&amp;data rates may apply. Reply STOP to opt out.</div>
@@ -125,6 +179,8 @@
     <div class="sample reply"><small data-i18n="you2">You send</small>STOP</div>
     <div class="sample" data-i18n="s5">ModernMD Urgent Care: You are unsubscribed and will receive no more texts. Reply START to re-subscribe.</div>
   </section>
+  </div>
+</div>
 </main>
 
 <footer class="wrap">
@@ -132,6 +188,15 @@
   <p data-i18n="foot-links"><a href="https://modernmduc.com/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a></p>
 </footer>
 
+<script>
+/* Ticked-box tint for browsers without :has(); visual only, the form script below is unchanged. */
+(function(){
+  [].forEach.call(document.querySelectorAll('.check input[type=checkbox]'),function(box){
+    function sync(){ box.closest('.check').classList.toggle('ticked', box.checked); }
+    box.addEventListener('change', sync); sync();
+  });
+})();
+</script>
 <script>
 (function(){
   function $(i){return document.getElementById(i);}
